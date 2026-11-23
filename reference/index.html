@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>tayo. design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@100..900&family=Piazzolla:opsz,wght@8..30,400..800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/tayo.css" />
+<style>
+  /* docs-only chrome (uses semantic tokens so it adapts to dark mode) */
+  .doc-h { margin: 0 0 .25rem; font-size: 1.5rem; font-weight: 500; letter-spacing: -0.05em; }
+  .doc-p { margin: 0 0 1.75rem; max-width: 40rem; font-size: .875rem; line-height: 1.45; letter-spacing: -0.035em; color: var(--t-ink-50); }
+  .doc-sub { margin: 2.25rem 0 .75rem; font-size: .75rem; font-weight: 600; color: var(--t-ink-50); }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .75rem; }
+  .sw { border-radius: 1rem; background: var(--t-surface-raised); padding: .5rem; box-shadow: var(--t-shadow-inset); }
+  .sw__c { height: 72px; border-radius: .7rem; border: 1px solid var(--t-ink-10); }
+  .sw__n { margin: .5rem .25rem 0; font-size: .8rem; font-weight: 600; color: var(--t-fg); }
+  .sw__v { margin: 0 .25rem .25rem; font-family: var(--t-font-mono); font-size: 11px; color: var(--t-ink-50); }
+  .ramp { display: flex; border-radius: 1rem; overflow: hidden; border: 6px solid var(--t-surface-raised); box-shadow: var(--t-shadow-inset); }
+  .ramp > div { flex: 1; height: 64px; display: flex; align-items: flex-end; padding: 6px; font: 10px var(--t-font-mono); background: var(--t-fg); color: var(--t-bg); }
+  .type-row { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; align-items: baseline; padding: 1.25rem 0; border-bottom: 1px solid var(--t-hairline); }
+  .type-row:first-child { border-top: 1px solid var(--t-hairline); }
+  .type-meta { font: 11px/1.5 var(--t-font-mono); color: var(--t-ink-50); }
+  @media (max-width: 640px) { .type-row { grid-template-columns: 1fr; gap: .25rem; } }
+  .demo { padding: 2rem; background: var(--t-surface-raised); border-radius: 1.5rem; box-shadow: var(--t-shadow-panel); overflow: hidden; }
+  .demo--paper { background: var(--t-bg); box-shadow: var(--t-shadow-inset); border: 1px solid var(--t-ink-5); }
+  .demo--reading { background: var(--t-bg-reading); box-shadow: var(--t-shadow-panel); border: 1px solid var(--t-ink-10); }
+  .demo--night { background: var(--t-night); }
+  .demo-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+  pre.code { margin: .75rem 0 0; padding: 1rem 1.25rem; overflow-x: auto; border-radius: 1rem; background: #151515; color: #e9e9e9; font: 12px/1.6 var(--t-font-mono); letter-spacing: 0; border: 1px solid rgb(255 255 255 / .08); }
+  details > summary { cursor: pointer; margin-top: .75rem; font-size: .8rem; font-weight: 600; color: var(--t-ink-60); list-style: none; }
+  details > summary::before { content: "+ "; } details[open] > summary::before { content: "– "; }
+  .tok-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+  .tok { padding: 1rem; background: var(--t-surface-raised); border-radius: 1rem; }
+  .tok__box { height: 64px; background: var(--t-surface); margin-bottom: .75rem; }
+  .space-bar { height: 12px; background: var(--t-fg); border-radius: 3px; }
+  .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 640px) { .dodont { grid-template-columns: 1fr; } }
+  .dd { padding: 1.25rem; border-radius: 1.25rem; background: var(--t-surface-raised); font-size: .875rem; line-height: 1.5; color: var(--t-ink-65); }
+  .dd h4 { margin: 0 0 .5rem; font-size: .8rem; color: var(--t-fg); }
+  .dd ul { margin: 0; padding-left: 1.1rem; } .dd li { margin: .3rem 0; }
+  .hero-art { aspect-ratio: 3.9 / 1; width: 100%; border-radius: var(--t-radius-xs); background:
+    radial-gradient(120% 90% at 20% 120%, #2b4fd8 0 22%, transparent 23%),
+    radial-gradient(60% 60% at 10% 110%, #6b8cff 0 30%, transparent 31%),
+    radial-gradient(140% 70% at 70% 100%, #5f9c2f 0 45%, transparent 46%),
+    radial-gradient(160% 80% at 40% 115%, #9ccf4a 0 50%, transparent 51%),
+    linear-gradient(#bcd8f0, #e8f1f6 60%); }
+  .ph { background: linear-gradient(135deg, var(--c1, #d9d4cc), var(--c2, #a89f92)); }
+  .toc { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+  .anchor { scroll-margin-top: 6rem; }
+  .tpl-stage { margin-top: 1.5rem; border-radius: 1.5rem; border: 1px solid var(--t-ink-10); overflow: hidden; }
+  .tpl-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem 1.25rem; background: var(--t-surface); border-bottom: 1px solid var(--t-ink-10); font-size: .75rem; color: var(--t-ink-60); }
+</style>
+</head>
+<body class="t-body t-root">
+<div class="t-page t-rails">
+
+  <!-- NAV -->
+  <nav class="t-nav t-nav-drop" aria-label="Primary">
+    <div class="t-nav__bar">
+      <a href="#top" aria-label="home"><span class="t-nav__avatar" style="display:grid;place-items:center;background:var(--t-paper);color:var(--t-ink);font-weight:700;font-size:.8rem">t.</span></a>
+      <div class="t-nav__links">
+        <a class="t-nav__link" href="#foundations" aria-current="page">foundations</a>
+        <a class="t-nav__link" href="#components">components</a>
+        <a class="t-nav__link" href="#templates">templates</a>
+        <a class="t-nav__link" href="#patterns">patterns</a>
+      </div>
+      <div class="t-nav__actions">
+        <button class="t-icon-btn t-theme-toggle" type="button" aria-label="Toggle dark mode" data-theme-toggle title="Toggle light / dark mode">
+          <svg class="t-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+          <svg class="t-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+        <a class="t-icon-btn" href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.77L17.75 3Zm-1.08 16.2h1.7L7.4 4.73H5.58L16.67 19.2Z"/></svg></a>
+        <a class="t-icon-btn" href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="top" class="t-column" style="overflow:hidden">
+    <div class="t-pad" style="padding-top:5rem;display:flex;flex-direction:column">
+      <div class="hero-art" role="img" aria-label="Illustrated landscape placeholder"></div>
+      <div style="margin-top:1.5rem;display:flex;flex-direction:column;align-items:flex-start">
+        <h1 class="t-display t-reveal">a design system... <span class="t-muted">for</span> agents.</h1>
+        <h2 class="t-subline t-reveal" style="--d:1">
+          <span><span class="t-muted">&amp;</span> <span class="t-ink">humans</span></span>
+          <span class="t-badges" aria-hidden="true"><span style="color:#3178c6">TS</span><span>✦</span><span>◐</span></span>
+        </h2>
+        <p class="t-subline t-subline--trail t-reveal" style="--d:2">lifted from tayoszn.vercel.app.</p>
+        <p class="t-lede t-reveal" style="--d:3">quiet monochrome paper (now with full dark mode), ink at varying opacity, handwritten asides, tactile objects (polaroids, stickers, inset wells), and complete templates for home, blog index, blog article, and project case study pages.</p>
+        <div class="toc t-reveal" style="--d:4">
+          <a class="t-btn" href="#templates">explore templates</a>
+          <button class="t-btn t-btn--surface" type="button" data-theme-toggle>toggle dark mode <span class="t-btn__orb">◐</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="t-section"></div>
+  <div class="t-divider" aria-hidden="true"></div>
+
+  <!-- PRINCIPLES (script statement) -->
+  <section class="t-column t-section--lg t-pad" style="display:flex;flex-direction:column;align-items:center">
+    <p class="t-script-paragraph t-reveal">
+      lowercase, always. <img class="t-sticker" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23151515'/%3E%3Cpath d='M16 7l8 5v8l-8 5-8-5v-8z' fill='%23efefef'/%3E%3C/svg%3E" /> ink fades instead of changing colour. the handwriting is where the personality lives, <img class="t-sticker" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23222'/%3E%3Ccircle cx='12' cy='10' r='4' fill='%23f24e1e'/%3E%3Ccircle cx='20' cy='10' r='4' fill='%23ff7262'/%3E%3Ccircle cx='12' cy='17' r='4' fill='%23a259ff'/%3E%3Ccircle cx='20' cy='17' r='4' fill='%231abcfe'/%3E%3Ccircle cx='12' cy='24' r='4' fill='%230acf83'/%3E%3C/svg%3E" /> and things you can touch get a little tilt. the colour is hiding in the footer.
+    </p>
+    <div style="width:100%;margin-top:4rem">
+      <h3 class="t-script-heading" style="margin:0 0 2rem 2rem">off screen.</h3>
+      <div class="t-polaroids" role="list">
+        <div class="t-polaroid" role="listitem" tabindex="0" style="--r:-10deg;z-index:0"><div class="t-polaroid__img ph" style="--c1:#f0e2c8;--c2:#b98c56"></div><span class="t-polaroid__caption"><span style="--i:0">ink</span> <span style="--i:1">#151515</span></span></div>
+        <div class="t-polaroid" role="listitem" tabindex="0" style="--r:-6deg;z-index:1"><div class="t-polaroid__img ph" style="--c1:#1b1f2c;--c2:#0b0c10"></div><span class="t-polaroid__caption"><span style="--i:0">paper</span> <span style="--i:1">#efefef</span></span></div>
+        <div class="t-polaroid" role="listitem" tabindex="0" style="--r:-1deg;z-index:2"><div class="t-polaroid__img ph" style="--c1:#fafafa;--c2:#cfcfcf"></div><span class="t-polaroid__caption"><span style="--i:0">reading</span> <span style="--i:1">#fbfbfb</span></span></div>
+        <div class="t-polaroid" role="listitem" tabindex="0" style="--r:4deg;z-index:3"><div class="t-polaroid__img ph" style="--c1:#e43c2f;--c2:#7a130c"></div><span class="t-polaroid__caption"><span style="--i:0">night</span> <span style="--i:1">#0d0e0e</span></span></div>
+        <div class="t-polaroid" role="listitem" tabindex="0" style="--r:8deg;z-index:4"><div class="t-polaroid__img ph" style="--c1:#f2a640;--c2:#6b3410"></div><span class="t-polaroid__caption"><span style="--i:0">lime</span> <span style="--i:1">below.</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="t-divider" aria-hidden="true"></div>
+
+  <!-- FOUNDATIONS -->
+  <section id="foundations" class="t-column t-pad t-section anchor">
+    <h2 class="t-statement t-reveal">foundations — paper, reading canvas, ink, and dark mode inversion.</h2>
+
+    <h3 class="doc-sub" id="tokens">color · primitives (light &amp; dark)</h3>
+    <div class="swatches">
+      <div class="sw"><div class="sw__c" style="background:var(--t-ink)"></div><p class="sw__n">ink (fg)</p><p class="sw__v">--t-ink · #151515 ⇄ #efefef</p></div>
+      <div class="sw"><div class="sw__c" style="background:var(--t-paper)"></div><p class="sw__n">paper (bg)</p><p class="sw__v">--t-paper · #efefef ⇄ #0d0e0e</p></div>
+      <div class="sw"><div class="sw__c" style="background:var(--t-bg-reading)"></div><p class="sw__n">reading canvas</p><p class="sw__v">--t-bg-reading · #fbfbfb ⇄ #111212</p></div>
+      <div class="sw"><div class="sw__c" style="background:var(--t-surface)"></div><p class="sw__n">well surface</p><p class="sw__v">--t-surface · #f5f5f5 ⇄ #151717</p></div>
+      <div class="sw"><div class="sw__c" style="background:var(--t-surface-raised)"></div><p class="sw__n">raised / input</p><p class="sw__v">--t-surface-raised · #fff ⇄ #1c1e1e</p></div>
+      <div class="sw"><div class="sw__c" style="background:var(--t-surface-bubble)"></div><p class="sw__n">comment bubble</p><p class="sw__v">--t-surface-bubble · #fafafa ⇄ #181a1a</p></div>
+      <div class="sw"><div class="sw__c" style="background:#0d0e0e;position:relative;overflow:hidden"><span style="position:absolute;inset:auto 0 -14px 6px;font-size:64px;font-weight:500;letter-spacing:-.09em;color:rgb(190 242 100 / .3)">tayo</span></div><p class="sw__n">lime (accent)</p><p class="sw__v">#bef264 @ 30% only</p></div>
+    </div>
+
+    <h3 class="doc-sub">color · ink opacity ramp (auto-inverts in dark mode)</h3>
+    <div class="ramp">
+      <div style="opacity:.04;color:var(--t-fg)">3</div><div style="opacity:.07;color:var(--t-fg)">5</div><div style="opacity:.12;color:var(--t-fg)">10</div><div style="opacity:.16;color:var(--t-fg)">15</div><div style="opacity:.22;color:var(--t-fg)">20</div><div style="opacity:.35">35</div><div style="opacity:.4">40</div><div style="opacity:.5">50</div><div style="opacity:.65">65</div><div style="opacity:.8">80</div><div style="opacity:1">100</div>
+    </div>
+    <p class="doc-p" style="margin-top:.75rem">5 → chips, badges, feature cards · 10 → case study year pill &amp; avatars · 15 → hairlines &amp; inputs · 20 → monograms &amp; blockquote bar · 35 → muted display words · 50 → inactive tabs &amp; excerpts · 65–70 → card &amp; case study copy · 80 → kickers &amp; comments · 100 → titles.</p>
+
+    <h3 class="doc-sub">typography</h3>
+    <div>
+      <div class="type-row"><div class="type-meta">display<br>clamp(1.75–2.1rem) / 500<br>lh .8 · -0.06em</div><div class="t-display">i code... <span class="t-muted">and</span> design.</div></div>
+      <div class="type-row"><div class="type-meta">subline<br>same size / 500<br>lh 1.05 · -0.065em · ink-35</div><div class="t-subline"><span>a <span class="t-ink">product engineer</span></span></div></div>
+      <div class="type-row"><div class="type-meta">blog index hero<br>Caveat 700 · 4xl→6xl</div><div class="t-blog-hero__title" style="margin:0;text-align:left">thoughts.</div></div>
+      <div class="type-row"><div class="type-meta">article &amp; case h1<br>3xl→5xl / 700 · lh 1.2</div><div class="t-article__title" style="margin:0;font-size:2.1rem">i don't want to be a frontend developer anymore.</div></div>
+      <div class="type-row"><div class="type-meta">article prose<br>1.125rem (18px) · lh 1.8</div><div style="font-size:1.125rem;line-height:1.8;color:var(--t-fg-prose)">i love clean interfaces, stupidly good spacing, and typography that feels intentional.</div></div>
+      <div class="type-row"><div class="type-meta">script heading<br>Caveat 700 · 2xl→3xl</div><div class="t-script-heading">where i dump my thoughts...</div></div>
+      <div class="type-row"><div class="type-meta">mono meta<br>11px · tracking 0</div><div class="t-mono-meta" style="color:var(--t-ink-50)">LAGOS 13:40 · Friday, 11/21/2026</div></div>
+    </div>
+
+    <h3 class="doc-sub">spacing · radius · elevation</h3>
+    <div class="tok-grid">
+      <div class="tok"><div style="display:grid;gap:6px"><div class="space-bar" style="width:4px"></div><div class="space-bar" style="width:8px"></div><div class="space-bar" style="width:12px"></div><div class="space-bar" style="width:16px"></div><div class="space-bar" style="width:24px"></div><div class="space-bar" style="width:40px"></div><div class="space-bar" style="width:64px"></div><div class="space-bar" style="width:96px"></div></div><p class="type-meta" style="margin:.75rem 0 0">4px grid · 1 2 3 4 6 10 16 24 32</p></div>
+      <div class="tok"><div class="tok__box" style="border-radius:0 0 26px 26px;background:var(--t-nav-bg)"></div><p class="type-meta" style="margin:0">tab · 0 0 26px 26px</p></div>
+      <div class="tok"><div class="tok__box" style="border-radius:1rem;border-top-left-radius:.25rem;background:var(--t-surface-bubble)"></div><p class="type-meta" style="margin:0">speech bubble · 1rem / tl .25rem</p></div>
+      <div class="tok"><div class="tok__box" style="border-radius:1.5rem"></div><p class="type-meta" style="margin:0">2xl · 1.5rem (hover card)</p></div>
+    </div>
+  </section>
+
+  <div class="t-divider" aria-hidden="true"></div>
+
+  <!-- COMPONENTS -->
+  <section id="components" class="t-column t-pad t-section anchor">
+    <h2 class="t-statement t-reveal">components — every primitive from home, blog, and case studies.</h2>
+
+    <h3 class="doc-sub">buttons &amp; links</h3>
+    <div class="demo demo--paper"><div class="demo-row">
+      <a class="t-btn" href="#templates">explore my world</a>
+      <a class="t-btn-solid" href="#templates">View Live</a>
+      <a class="t-btn-ghost" href="#templates">View Code</a>
+      <a class="t-link-arrow" href="#templates">read case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      <a class="t-back-link" href="#top" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6 9 12l6 6"/></svg>Back to Projects</a>
+    </div></div>
+
+    <h3 class="doc-sub">chips · badges · tags · segmented filter</h3>
+    <div class="demo demo--paper">
+      <div class="demo-row"><span class="t-chip">node.js</span><span class="t-chip">typescript</span><span class="t-chip">+2</span><span class="t-badge">2026</span><span class="t-tag">yapping</span><span class="t-pill-tag">Self-Hosted</span></div>
+      <div class="t-segmented" role="group" aria-label="Filter" style="margin-top:1.5rem" data-seg>
+        <button class="t-segmented__item" aria-pressed="true">all</button>
+        <button class="t-segmented__item" aria-pressed="false">web apps</button>
+        <button class="t-segmented__item" aria-pressed="false">api services</button>
+      </div>
+    </div>
+
+    <h3 class="doc-sub">project card (hover → well rounds to 1.5rem)</h3>
+    <div class="t-grid">
+      <article class="t-card t-reveal">
+        <div class="t-card__well"><div class="t-card__media"><span class="t-card__monogram">h</span></div></div>
+        <div class="t-card__body">
+          <div class="t-card__head"><h3 class="t-card__title">helix</h3><span class="t-badge">2025</span></div>
+          <p class="t-card__kicker">self-hosted localhost tunneling tool</p>
+          <p class="t-card__desc">an ngrok alternative that exposes localhost on persistent, path-based public urls instead of disposable subdomains. cli-first, self-hosted relay.</p>
+          <div class="t-card__chips"><span class="t-chip">node.js</span><span class="t-chip">typescript</span><span class="t-chip">cli</span><span class="t-chip">+2</span></div>
+          <div class="t-card__actions"><a class="t-link-arrow" href="templates/case-study.html">read case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+        </div>
+      </article>
+      <article class="t-card t-reveal" style="--d:1">
+        <div class="t-card__well"><div class="t-card__media ph" style="--c1:#c9d6e8;--c2:#7d8ea8"></div></div>
+        <div class="t-card__body">
+          <div class="t-card__head"><h3 class="t-card__title">kroma</h3><span class="t-badge">2026</span></div>
+          <p class="t-card__kicker">mcp server for ai design intelligence</p>
+          <p class="t-card__desc">gives ai coding agents live access to the design web — real ui inspiration, component code and motion techniques — so agents stop shipping generic layouts.</p>
+          <div class="t-card__chips"><span class="t-chip">mcp</span><span class="t-chip">typescript</span><span class="t-chip">+2</span></div>
+          <div class="t-card__actions"><a class="t-link-arrow" href="templates/case-study.html">read case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+        </div>
+      </article>
+    </div>
+
+    <h3 class="doc-sub">sticker · polaroid · curved gallery · activity panel</h3>
+    <div class="demo demo--paper">
+      <div class="t-arc" style="height:260px" aria-hidden="true">
+        <div class="t-arc__track" style="--n:14">
+          <div class="t-arc__item ph" style="--i:0;--c1:#e9e2d6;--c2:#6b4a32"></div><div class="t-arc__item ph" style="--i:1;--c1:#f1dede;--c2:#b98b8b"></div><div class="t-arc__item ph" style="--i:2;--c1:#2c2540;--c2:#0e0b18"></div><div class="t-arc__item ph" style="--i:3;--c1:#d8d3c4;--c2:#8e8572"></div><div class="t-arc__item ph" style="--i:4;--c1:#efe7da;--c2:#51382a"></div><div class="t-arc__item ph" style="--i:5;--c1:#cfe0f2;--c2:#4b6b91"></div><div class="t-arc__item ph" style="--i:6;--c1:#e3eccf;--c2:#6f8a3a"></div><div class="t-arc__item ph" style="--i:7;--c1:#f2e4cc;--c2:#a46b27"></div><div class="t-arc__item ph" style="--i:8;--c1:#dcdcdc;--c2:#777"></div><div class="t-arc__item ph" style="--i:9;--c1:#f4d3c4;--c2:#9b4f33"></div><div class="t-arc__item ph" style="--i:10;--c1:#1e2a22;--c2:#0b100c"></div><div class="t-arc__item ph" style="--i:11;--c1:#ece4f4;--c2:#8a76a8"></div><div class="t-arc__item ph" style="--i:12;--c1:#f6efe2;--c2:#c9a46a"></div><div class="t-arc__item ph" style="--i:13;--c1:#d6e6e2;--c2:#4f7d73"></div>
+        </div>
+      </div>
+      <div class="t-panel" style="margin-top:1.5rem">
+        <div class="t-panel__head"><span><strong>2,534</strong> contributions in the last year</span><span>select a day to explore</span></div>
+        <div class="t-heatmap" id="heat"></div>
+        <div class="t-heatmap-legend">less <i style="--a:.06"></i><i style="--a:.2"></i><i style="--a:.45"></i><i style="--a:.7"></i><i style="--a:1"></i> more</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="t-divider" aria-hidden="true"></div>
+
+  <!-- PAGE TEMPLATES (Blog Index, Blog Post Article, Project Case Study) -->
+  <section id="templates" class="t-column t-pad t-section anchor">
+    <h2 class="t-statement t-reveal">page templates — blog index, blog article, and project case study.</h2>
+    <p class="doc-p" style="margin-top:.75rem">extracted directly from <code>/blog</code>, <code>/blog/[slug]</code>, and <code>/projects/[slug]</code>. switch tabs below to inspect each template live, or open the standalone files in <code>templates/</code>.</p>
+
+    <div class="t-segmented" role="tablist" aria-label="Page template switcher" data-tpl-tabs>
+      <button class="t-segmented__item" role="tab" aria-selected="true" aria-pressed="true" data-tpl="case">case study (/projects/:id)</button>
+      <button class="t-segmented__item" role="tab" aria-selected="false" aria-pressed="false" data-tpl="article">blog post (/blog/:slug)</button>
+      <button class="t-segmented__item" role="tab" aria-selected="false" aria-pressed="false" data-tpl="blog">blog index (/blog)</button>
+    </div>
+
+    <!-- 1. CASE STUDY PREVIEW -->
+    <div class="tpl-stage" data-tpl-pane="case">
+      <div class="tpl-bar">
+        <span>template · <code>templates/case-study.html</code> (max-w-4xl · wider left-40/right-40 rails)</span>
+        <a class="t-link-arrow" href="templates/case-study.html">open standalone <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </div>
+      <div class="t-case" style="padding-top:2.5rem">
+        <a class="t-back-link" href="#templates"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6 9 12l6 6"/></svg><span>Back to Projects</span></a>
+        <header class="t-case__header">
+          <div class="t-case__title-row"><h3 class="t-case__title">Helix</h3><span class="t-case__year">2025</span></div>
+          <p class="t-case__subtitle">Self-Hosted Localhost Tunneling Tool</p>
+          <div class="t-case__actions">
+            <a class="t-btn-solid" href="#templates"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6"/><path d="M15 3h6v6M10 14 21 3"/></svg><span>View Live</span></a>
+            <a class="t-btn-ghost" href="#templates"><span>View Code</span></a>
+          </div>
+        </header>
+        <div class="t-case__hero" style="margin-bottom:2rem"><span class="t-case__monogram">H</span></div>
+        <div class="t-case__tags" style="margin-bottom:2.5rem">
+          <span class="t-pill-tag">Node.js</span><span class="t-pill-tag">TypeScript</span><span class="t-pill-tag">CLI</span><span class="t-pill-tag">Self-Hosted</span><span class="t-pill-tag">Networking</span>
+        </div>
+        <div class="t-case__body" style="gap:2.25rem">
+          <section><h4 class="t-case__h2">The Challenge</h4><p class="t-case__p">Existing tunneling tools hand out disposable subdomains on every restart, offer no self-hosting story, and charge for basics like persistent URLs.</p></section>
+          <section><h4 class="t-case__h2">The Solution</h4><p class="t-case__p">Built Helix around path-based routing instead of subdomains — every tunnel lives at a persistent <code>/tunnel/{name}/</code> path on a self-hosted relay with passwordless email-code auth.</p></section>
+          <section>
+            <h4 class="t-case__h2 t-case__h2--spaced">Impact</h4>
+            <ul class="t-case__list">
+              <li><span class="t-case__marker">•</span><span>Delivered a working ngrok alternative with zero ongoing hosting cost</span></li>
+              <li><span class="t-case__marker">•</span><span>Solved relative-URL rewriting for path-based tunneling</span></li>
+            </ul>
+          </section>
+          <section>
+            <h4 class="t-case__h2 t-case__h2--spaced">Key Features</h4>
+            <div class="t-feature-grid">
+              <div class="t-feature-card"><p>Path-based persistent tunnels (/tunnel/{name}/) instead of disposable subdomains</p></div>
+              <div class="t-feature-card"><p>Self-hosted relay — traffic stays on infrastructure you control</p></div>
+              <div class="t-feature-card"><p>Passwordless email-code authentication across CLI and web</p></div>
+              <div class="t-feature-card"><p>Live request history dashboard &amp; password-locked tunnels</p></div>
+            </div>
+          </section>
+          <section>
+            <h4 class="t-case__h2 t-case__h2--spaced">Tech Stack</h4>
+            <div class="t-stack-grid">
+              <div class="t-stack-item"><span class="t-stack-dot"></span><span>Node.js relay server + CLI client, TypeScript</span></div>
+              <div class="t-stack-item"><span class="t-stack-dot"></span><span>Appwrite for auth/data &amp; GitHub OAuth</span></div>
+            </div>
+          </section>
+          <section>
+            <h4 class="t-case__h2 t-case__h2--spaced">Lessons Learned</h4>
+            <ul class="t-case__list">
+              <li><span class="t-case__marker">→</span><span>Path-based routing is viable when relative asset URLs are rewritten server-side</span></li>
+              <li><span class="t-case__marker">→</span><span>Shipping a full product in 4–5 days is possible with tight scope discipline</span></li>
+            </ul>
+          </section>
+        </div>
+        <div class="t-case__cta">
+          <h4 class="t-case__cta-title">Interested in working together?</h4>
+          <p class="t-case__cta-sub">Let's build something amazing.</p>
+          <a class="t-btn-solid t-btn-solid--lg" href="#top">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. BLOG POST ARTICLE PREVIEW -->
+    <div class="tpl-stage demo--reading" data-tpl-pane="article" hidden>
+      <div class="tpl-bar">
+        <span>template · <code>templates/blog-post.html</code> (max-w-3xl · #fbfbfb reading canvas · .t-prose)</span>
+        <a class="t-link-arrow" href="templates/blog-post.html">open standalone <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </div>
+      <article class="t-article" style="padding-top:2.5rem">
+        <h3 class="t-article__title">i don't want to be a frontend developer anymore.</h3>
+        <p class="t-article__deck">i don't actually hate frontend. i just don't want to stop at writing the frontend. this is about moving from thinking like a frontend developer to thinking like a product engineer.</p>
+        <div class="t-article__bar">
+          <div class="t-article__byline"><span class="t-article__author">tayo.</span><span>·</span><span>4 min read</span><span>·</span><span>Sep 30, 2026</span><span>·</span><span>318 reads</span></div>
+          <div class="t-article__actions">
+            <button class="t-action-orb t-action-orb--like" type="button" aria-label="Like" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></button>
+            <button class="t-action-orb" type="button" aria-label="Bookmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></button>
+            <button class="t-action-orb" type="button" aria-label="Share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg></button>
+          </div>
+        </div>
+        <div class="t-prose">
+          <p>i love clean interfaces, stupidly good spacing, typography that feels intentional, and spending 45 minutes moving something <code>4px</code> to the left because <em>“something feels off.”</em></p>
+          <blockquote>“frontend was never really the destination for me. it was the first door.”</blockquote>
+          <pre><code>const ship = (idea) =&gt; designAndEngineer(idea);</code></pre>
+        </div>
+        <div class="t-article__tags"><span class="t-pill-tag">yapping</span><span class="t-pill-tag">product-engineering</span></div>
+        <div class="t-engage-bar">
+          <button class="t-engage-btn t-engage-btn--like" type="button" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span>25</span></button>
+          <button class="t-engage-btn" type="button" aria-expanded="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>1</span></button>
+          <button class="t-engage-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg><span>4</span></button>
+        </div>
+        <div class="t-comments">
+          <h4 class="t-comments__title">1 Comment</h4>
+          <div class="t-comment-form">
+            <input class="t-input" type="text" placeholder="Your name" />
+            <textarea class="t-textarea" rows="2" placeholder="Share your thoughts..."></textarea>
+            <div class="t-comment-form__actions"><button class="t-btn-solid" type="button">Post comment</button></div>
+          </div>
+          <div class="t-comment">
+            <div class="t-comment__avatar">S</div>
+            <div class="t-comment__main">
+              <div class="t-comment__bubble"><p class="t-comment__author">Sammie</p><p class="t-comment__text">To be honest this is really nice — no titles, just pure building.</p></div>
+              <div class="t-comment__meta"><span>Oct 2</span><button class="t-comment__action" type="button">♥ 2</button><button class="t-comment__action" type="button">Reply</button></div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- 3. BLOG INDEX PREVIEW -->
+    <div class="tpl-stage demo--reading" data-tpl-pane="blog" hidden>
+      <div class="tpl-bar">
+        <span>template · <code>templates/blog-index.html</code> (max-w-220 · Caveat hero · filter pills · post feed)</span>
+        <a class="t-link-arrow" href="templates/blog-index.html">open standalone <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </div>
+      <div class="t-blog-index" style="padding-top:2.5rem">
+        <header class="t-blog-hero" style="margin-bottom:2.25rem">
+          <h3 class="t-blog-hero__title">thoughts.</h3>
+          <p class="t-blog-hero__sub">thoughts on design, development, and everything in between.</p>
+        </header>
+        <div class="t-filter-pills" style="margin-bottom:2.25rem">
+          <button class="t-filter-pill" type="button" aria-pressed="true">All</button>
+          <button class="t-filter-pill" type="button" aria-pressed="false">yapping</button>
+          <button class="t-filter-pill" type="button" aria-pressed="false">tech</button>
+          <button class="t-filter-pill" type="button" aria-pressed="false">life</button>
+        </div>
+        <div class="t-feed">
+          <a class="t-feed-item" href="templates/blog-post.html">
+            <div class="t-feed-item__row">
+              <div class="t-feed-item__thumb"><div class="ph" style="--c1:#2b3a4a;--c2:#141a21;height:100%"></div></div>
+              <div class="t-feed-item__body">
+                <h4 class="t-feed-item__title">i don't want to be a frontend developer anymore.</h4>
+                <p class="t-feed-item__desc">i don't actually hate frontend. i just don't want to stop at writing the frontend. this is about moving from frontend developer to product engineer.</p>
+                <div class="t-feed-item__meta">
+                  <div class="t-feed-item__dates"><span>Sep 30, 2026</span><span>·</span><span>318 reads</span></div>
+                  <div class="t-feed-item__counts"><span>♥ 24</span><span>💬 1</span></div>
+                </div>
+                <div class="t-feed-item__tags"><span class="t-feed-item__tag">yapping</span></div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="t-divider" aria-hidden="true"></div>
+
+  <!-- PATTERNS / DO DONT -->
+  <section id="patterns" class="t-column t-pad t-section anchor">
+    <h2 class="t-statement t-reveal">patterns — how pages are composed across light &amp; dark mode.</h2>
+    <p class="doc-p" style="margin-top:1rem">home and case studies sit on <code>--t-bg</code> (<code>#efefef</code> light / <code>#0d0e0e</code> dark); blog index and article pages use the slightly brighter <code>--t-bg-reading</code> (<code>#fbfbfb</code> light / <code>#111212</code> dark) for reading comfort. set <code>data-theme="dark"</code> or <code>class="dark"</code> on <code>&lt;html&gt;</code> to flip the entire 11-step ink opacity ramp.</p>
+    <div class="dodont">
+      <div class="dd"><h4>do</h4><ul>
+        <li>write everything in lowercase; end headings with a period or "...".</li>
+        <li>build hierarchy with ink opacity (100 / 80 / 70 / 65 / 50 / 35).</li>
+        <li>use <code>.t-rails--wide</code> (<code>left-40 / right-40</code>) on <code>max-w-4xl</code> case study pages.</li>
+        <li>use speech-bubble corners (<code>rounded-2xl rounded-tl-sm</code>) on blog comments.</li>
+        <li>make every control a pill; put cards inside an inset well.</li>
+        <li>use semantic tokens (<code>--t-fg</code>, <code>--t-surface</code>, <code>--t-ink-70</code>) so dark mode works automatically.</li>
+      </ul></div>
+      <div class="dd"><h4>don't</h4><ul>
+        <li>introduce brand colours, blue links or coloured buttons.</li>
+        <li>use lime anywhere except the footer wordmark (at 30%).</li>
+        <li>hardcode <code>#fff</code> or <code>#151515</code> on cards or text that need to invert in dark mode.</li>
+        <li>set display type with loose leading; lines should nearly touch.</li>
+        <li>use Caveat for body copy, UI labels or anything under 20px.</li>
+        <li>exceed the single-column container or add sidebars.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="t-footer">
+    <div class="t-footer__dots"></div>
+    <div class="t-footer__inner">
+      <span class="t-nav__avatar" style="display:grid;place-items:center;background:#fff;color:#151515;font-weight:700;font-size:.8rem;border-radius:.6rem">t.</span>
+      <h2 class="t-footer__title">let's build something people actually use.</h2>
+      <a class="t-btn t-btn--light" href="#top" style="margin-top:1.25rem;width:fit-content">back to top <span class="t-btn__orb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span></a>
+      <div class="t-footer__bar">
+        <div class="t-footer__group"><span>follow me on</span>
+          <a class="t-social" href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.77L17.75 3Z"/></svg></a>
+          <a class="t-social" href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
+        </div>
+        <div class="t-footer__group"><span>© 2026 tayo. design system</span><span class="t-mono-meta">LAGOS</span><time class="t-mono-meta" id="clock"></time></div>
+      </div>
+    </div>
+    <div class="t-footer__stage">
+      <div class="t-footer__scene hero-art" style="aspect-ratio:auto;border-radius:0"></div>
+      <p class="t-wordmark" aria-hidden="true">tayo</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // reveal-on-scroll
+  const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.t-reveal').forEach(el => io.observe(el));
+  // dark mode toggle
+  document.querySelectorAll('[data-theme-toggle]').forEach(btn => btn.addEventListener('click', () => {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    html.classList.toggle('dark', next === 'dark');
+  }));
+  // segmented control
+  document.querySelectorAll('[data-seg]').forEach(g => g.addEventListener('click', e => {
+    const b = e.target.closest('.t-segmented__item'); if (!b) return;
+    g.querySelectorAll('.t-segmented__item').forEach(x => x.setAttribute('aria-pressed', x === b));
+  }));
+  // template preview tabs
+  document.querySelector('[data-tpl-tabs]').addEventListener('click', e => {
+    const b = e.target.closest('[data-tpl]'); if (!b) return;
+    const target = b.dataset.tpl;
+    document.querySelectorAll('[data-tpl]').forEach(x => {
+      x.setAttribute('aria-pressed', x === b);
+      x.setAttribute('aria-selected', x === b);
+    });
+    document.querySelectorAll('[data-tpl-pane]').forEach(p => p.hidden = p.dataset.tplPane !== target);
+  });
+  // heatmap demo
+  const heat = document.getElementById('heat');
+  for (let i = 0; i < 7 * 52; i++) { const v = Math.random(); const a = v > .93 ? 1 : v > .8 ? .7 : v > .6 ? .45 : v > .4 ? .2 : .06; const c = document.createElement('i'); c.style.setProperty('--a', a); heat.appendChild(c); }
+  // lagos clock
+  const clk = document.getElementById('clock');
+  const tick = () => clk.textContent = new Date().toLocaleString('en-US', { timeZone: 'Africa/Lagos', hour: '2-digit', minute: '2-digit', hour12: false, weekday: 'long' });
+  tick(); setInterval(tick, 30000);
+</script>
+</body>
+</html>

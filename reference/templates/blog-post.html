@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>i don't want to be a frontend developer anymore. — blog post template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@100..900&family=Piazzolla:opsz,wght@8..30,400..800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/tayo.css" />
+</head>
+<body class="t-body t-root">
+<div class="t-page t-page--reading">
+
+  <!-- Dock-tab Navigation -->
+  <nav class="t-nav t-nav-drop" aria-label="Main navigation">
+    <div class="t-nav__bar">
+      <a href="../index.html" aria-label="home"><span class="t-nav__avatar" style="display:grid;place-items:center;background:var(--t-paper);color:var(--t-ink);font-weight:700;font-size:.8rem">t.</span></a>
+      <div class="t-nav__links">
+        <a class="t-nav__link" href="case-study.html">projects</a>
+        <a class="t-nav__link" href="blog-index.html" aria-current="page">blog</a>
+      </div>
+      <div class="t-nav__actions">
+        <button class="t-icon-btn t-theme-toggle" type="button" aria-label="Toggle dark mode" data-theme-toggle>
+          <svg class="t-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+          <svg class="t-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Container (max-w-3xl / 768px, pt-32) -->
+  <article class="t-article">
+    <h1 class="t-article__title t-reveal">i don't want to be a frontend developer anymore.</h1>
+    <p class="t-article__deck t-reveal" style="--d:1">i don't actually hate frontend. i just don't want to stop at writing the frontend. this is about why i'm moving from thinking like a frontend developer to thinking like a product engineer, building the idea, not just the interface.</p>
+
+    <!-- Byline & Top Action Orbs -->
+    <div class="t-article__bar t-reveal" style="--d:2">
+      <div class="t-article__byline">
+        <span class="t-article__author">tayo.</span>
+        <span>·</span><span>4 min read</span>
+        <span>·</span><span>Sep 30, 2026</span>
+        <span>·</span><span>318 reads</span>
+      </div>
+      <div class="t-article__actions">
+        <button class="t-action-orb t-action-orb--like" type="button" aria-label="Like post" aria-pressed="false" data-like-btn>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </button>
+        <button class="t-action-orb" type="button" aria-label="Bookmark post" aria-pressed="false" onclick="this.setAttribute('aria-pressed', this.getAttribute('aria-pressed')!=='true')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+        </button>
+        <button class="t-action-orb" type="button" aria-label="Share post" data-share-open>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Rich-Text Prose Body (.t-prose / .tayo-prose) -->
+    <div class="t-prose t-reveal" style="--d:3">
+      <p>okay, before anybody starts fighting me, i still love frontend.</p>
+      <p>i love clean interfaces, stupidly good spacing, typography that actually feels intentional, smooth motion, tiny hover states nobody asked for, and spending 45 minutes moving something <code>4px</code> to the left because <em>“something feels off.”</em></p>
+      <p><strong>i don't actually want to be a frontend developer anymore.</strong> not because frontend is boring — it's because frontend was never really the destination for me. it was the first door.</p>
+      <hr />
+      <h2>i used to think being good at frontend was the goal</h2>
+      <p>when i started taking web development seriously, my roadmap was straightforward: learn html, css, javascript, react, next.js, get good at typescript, build cool websites. simple — until curiosity kept pushing me into every other layer of the stack.</p>
+      <blockquote>“you stop seeing a product as a tree of components, and start seeing it as a loop between an idea, a system, and a person trying to get something done.”</blockquote>
+      <pre><code>// product engineering loop
+const ship = async (idea) => {
+  const system = await designAndArchitect(idea);
+  return iterateWithRealUsers(system);
+};</code></pre>
+      <p>that's the shift: caring about the whole thing from the database schema to the <code>300ms</code> hover curve.</p>
+    </div>
+
+    <!-- Post Tags -->
+    <div class="t-article__tags">
+      <span class="t-pill-tag">yapping</span>
+      <span class="t-pill-tag">product-engineering</span>
+    </div>
+
+    <!-- Bottom Engagement Bar -->
+    <div class="t-engage-bar">
+      <button class="t-engage-btn t-engage-btn--like" type="button" aria-pressed="false" data-like-btn>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        <span data-like-count>24</span>
+      </button>
+      <button class="t-engage-btn" type="button" aria-expanded="true" onclick="const c=document.getElementById('comments');c.hidden=!c.hidden;this.setAttribute('aria-expanded',!c.hidden)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>1</span>
+      </button>
+      <button class="t-engage-btn" type="button" data-share-open>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+        <span>4</span>
+      </button>
+    </div>
+
+    <!-- Threaded Comments Drawer -->
+    <section class="t-comments" id="comments">
+      <h3 class="t-comments__title">1 Comment</h3>
+      <form class="t-comment-form" onsubmit="event.preventDefault()">
+        <input class="t-input" type="text" placeholder="Your name" />
+        <textarea class="t-textarea" rows="3" placeholder="Share your thoughts..."></textarea>
+        <div class="t-comment-form__actions">
+          <button class="t-btn-solid" type="submit">Post comment</button>
+        </div>
+      </form>
+
+      <div class="t-comment-list">
+        <div class="t-comment">
+          <div class="t-comment__avatar">S</div>
+          <div class="t-comment__main">
+            <div class="t-comment__bubble">
+              <p class="t-comment__author">Sammie</p>
+              <p class="t-comment__text">To be honest this is really nice — no titles, just pure building.</p>
+            </div>
+            <div class="t-comment__meta">
+              <span>Oct 2</span>
+              <button class="t-comment__action t-comment__action--like" type="button">♥ 2</button>
+              <button class="t-comment__action" type="button">Reply</button>
+            </div>
+            <div class="t-comment__replies">
+              <div class="t-comment">
+                <div class="t-comment__avatar t-comment__avatar--sm">T</div>
+                <div class="t-comment__main">
+                  <div class="t-comment__bubble t-comment__bubble--sm">
+                    <p class="t-comment__author">tayo.</p>
+                    <p class="t-comment__text" style="font-size:.75rem">appreciate you bro.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <!-- Share Modal -->
+  <div class="t-modal-backdrop" id="share-modal" hidden>
+    <div class="t-modal" role="dialog" aria-modal="true" aria-labelledby="share-title">
+      <div class="t-modal__head">
+        <h3 class="t-modal__title" id="share-title">Share this post</h3>
+        <button class="t-modal__close" type="button" aria-label="Close" data-share-close>✕</button>
+      </div>
+      <div class="t-modal__url">https://tayoszn.vercel.app/blog/i-dont-want-to-be-a-frontend-developer-anymore</div>
+      <div class="t-modal__list">
+        <button class="t-modal__item" type="button" onclick="this.querySelector('.lbl').textContent='Copied!'"><span class="t-modal__orb">⧉</span><span class="lbl">Copy link</span></button>
+        <button class="t-modal__item" type="button"><span class="t-modal__orb">𝕏</span><span>Share on X</span></button>
+        <button class="t-modal__item" type="button"><span class="t-modal__orb">💬</span><span>Share on WhatsApp</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.t-reveal').forEach(el => el.classList.add('is-in'));
+  document.querySelectorAll('[data-theme-toggle]').forEach(btn => btn.addEventListener('click', () => {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    html.classList.toggle('dark', next === 'dark');
+  }));
+  let liked = false, count = 24;
+  document.querySelectorAll('[data-like-btn]').forEach(btn => btn.addEventListener('click', () => {
+    liked = !liked; count += liked ? 1 : -1;
+    document.querySelectorAll('[data-like-btn]').forEach(b => b.setAttribute('aria-pressed', liked));
+    document.querySelector('[data-like-count]').textContent = count;
+  }));
+  const modal = document.getElementById('share-modal');
+  document.querySelectorAll('[data-share-open]').forEach(b => b.addEventListener('click', () => modal.hidden = false));
+  document.querySelector('[data-share-close]').addEventListener('click', () => modal.hidden = true);
+  modal.addEventListener('click', e => { if (e.target === modal) modal.hidden = true; });
+</script>
+</body>
+</html>

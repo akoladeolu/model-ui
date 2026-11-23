@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>thoughts. — blog index template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/tayo.css" />
+</head>
+<body class="t-body t-root">
+<div class="t-page t-page--reading t-rails">
+
+  <!-- Dock-tab Navigation -->
+  <nav class="t-nav t-nav-drop" aria-label="Main navigation">
+    <div class="t-nav__bar">
+      <a href="../index.html" aria-label="home"><span class="t-nav__avatar" style="display:grid;place-items:center;background:var(--t-paper);color:var(--t-ink);font-weight:700;font-size:.8rem">t.</span></a>
+      <div class="t-nav__links">
+        <a class="t-nav__link" href="case-study.html">projects</a>
+        <a class="t-nav__link" href="blog-index.html" aria-current="page">blog</a>
+      </div>
+      <div class="t-nav__actions">
+        <button class="t-icon-btn t-theme-toggle" type="button" aria-label="Toggle dark mode" data-theme-toggle>
+          <svg class="t-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+          <svg class="t-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Blog Index Container (max-w-220 / 880px, pt-32) -->
+  <main class="t-blog-index">
+    <header class="t-blog-hero t-reveal">
+      <h1 class="t-blog-hero__title">thoughts.</h1>
+      <p class="t-blog-hero__sub">thoughts on design, development, and everything in between.</p>
+    </header>
+
+    <!-- Tag Filter Pills -->
+    <div class="t-filter-pills t-reveal" style="--d:1" role="group" aria-label="Filter posts by tag" data-pills>
+      <button class="t-filter-pill" type="button" aria-pressed="true" data-tag="all">All</button>
+      <button class="t-filter-pill" type="button" aria-pressed="false" data-tag="yapping">yapping</button>
+      <button class="t-filter-pill" type="button" aria-pressed="false" data-tag="engineering">engineering</button>
+      <button class="t-filter-pill" type="button" aria-pressed="false" data-tag="design">design</button>
+      <button class="t-filter-pill" type="button" aria-pressed="false" data-tag="life">life</button>
+    </div>
+
+    <!-- Post Feed (grid-cols-1 gap-12) -->
+    <div class="t-feed" id="feed">
+      <article class="t-reveal" style="--d:2" data-tags="yapping,engineering">
+        <a class="t-feed-item" href="blog-post.html">
+          <div class="t-feed-item__row">
+            <div class="t-feed-item__thumb">
+              <div style="background:linear-gradient(135deg,#2b3a4a,#141a21)"></div>
+            </div>
+            <div class="t-feed-item__body">
+              <h2 class="t-feed-item__title">i don't want to be a frontend developer anymore.</h2>
+              <p class="t-feed-item__desc">i don't actually hate frontend. i just don't want to stop at writing the frontend. this is about why i'm moving from thinking like a frontend developer to thinking like a product engineer, building the idea, not just the interface.</p>
+              <div class="t-feed-item__meta">
+                <div class="t-feed-item__dates">
+                  <span>Sep 30, 2026</span><span>·</span><span>318 reads</span>
+                </div>
+                <div class="t-feed-item__counts">
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>24</span>
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>1</span>
+                </div>
+              </div>
+              <div class="t-feed-item__tags">
+                <span class="t-feed-item__tag">yapping</span>
+                <span class="t-feed-item__tag">engineering</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="t-reveal" style="--d:3" data-tags="design,engineering">
+        <a class="t-feed-item" href="blog-post.html">
+          <div class="t-feed-item__row">
+            <div class="t-feed-item__body">
+              <h2 class="t-feed-item__title">why monochrome interfaces feel calmer than colour palettes.</h2>
+              <p class="t-feed-item__desc">when every component fights for attention with a different accent hue, nothing feels tactile. stripping a system down to one ink and an opacity ramp forces spacing and motion to do the real work.</p>
+              <div class="t-feed-item__meta">
+                <div class="t-feed-item__dates">
+                  <span>Oct 14, 2026</span><span>·</span><span>512 reads</span>
+                </div>
+                <div class="t-feed-item__counts">
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>58</span>
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>3</span>
+                </div>
+              </div>
+              <div class="t-feed-item__tags">
+                <span class="t-feed-item__tag">design</span>
+                <span class="t-feed-item__tag">engineering</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </article>
+    </div>
+
+    <!-- Pagination -->
+    <nav class="t-pagination" aria-label="Pagination">
+      <button class="t-page-btn" type="button" disabled>Previous</button>
+      <span class="t-page-status">Page 1 of 2</span>
+      <button class="t-page-btn" type="button">Next</button>
+    </nav>
+  </main>
+
+  <!-- Closing Footer Stage -->
+  <footer class="t-footer">
+    <div class="t-footer__dots"></div>
+    <div class="t-footer__inner">
+      <span class="t-nav__avatar" style="display:grid;place-items:center;background:#fff;color:#151515;font-weight:700;font-size:.8rem;border-radius:.6rem">t.</span>
+      <h2 class="t-footer__title">Let's build something<br>people actually use.</h2>
+      <a class="t-btn t-btn--light" href="mailto:hello@example.com" style="margin-top:1.25rem;width:fit-content">Get in touch <span class="t-btn__orb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <div class="t-footer__bar">
+        <div class="t-footer__group"><span>© 2026 tayo. design system</span></div>
+        <div class="t-footer__group"><span class="t-mono-meta">LAGOS</span></div>
+      </div>
+    </div>
+    <div class="t-footer__stage">
+      <div class="t-footer__scene" style="background:linear-gradient(135deg,#2b4fd8 0%,#5f9c2f 55%,#9ccf4a 100%)"></div>
+      <p class="t-wordmark" aria-hidden="true">tayo</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+  document.querySelectorAll('.t-reveal').forEach(el => el.classList.add('is-in'));
+  document.querySelectorAll('[data-theme-toggle]').forEach(btn => btn.addEventListener('click', () => {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    html.classList.toggle('dark', next === 'dark');
+  }));
+  document.querySelector('[data-pills]').addEventListener('click', e => {
+    const pill = e.target.closest('.t-filter-pill'); if (!pill) return;
+    const tag = pill.dataset.tag;
+    document.querySelectorAll('.t-filter-pill').forEach(p => p.setAttribute('aria-pressed', p === pill));
+    document.querySelectorAll('#feed > article').forEach(a => {
+      a.hidden = tag !== 'all' && !a.dataset.tags.split(',').includes(tag);
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+/* ==========================================================================
+   Model UI — Design Tokens (Light + Dark mode + Brand Accent System)
+   Prefix: --t-
+   Dark mode activates on `.dark`, `[data-theme="dark"]`, or OS dark preference
+   when `[data-theme="light"]` is not explicitly set.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ---------- color: primitives ---------- */
+  --t-ink: #151515;            /* "base" — all text, nav, active states       */
+  --t-ink-warm: #302f2d;       /* long-form article prose body color          */
+  --t-paper: #efefef;          /* "light" — home & case-study background      */
+  --t-paper-reading: #fbfbfb;  /* brighter reading surface (/blog, /blog/:id) */
+  --t-white: #ffffff;          /* polaroid frames, sticker borders, inputs    */
+  --t-well: #f5f5f5;           /* inset wells: cards, segmented control track */
+  --t-bubble: #fafafa;         /* neutral-50 comment speech bubbles & boxes   */
+  --t-night: #0d0e0e;          /* footer / dark stage                         */
+  --t-cta-top: #2a2a2a;        /* primary button gradient start               */
+  --t-cta-bottom: #111111;     /* primary button gradient end                 */
+  --t-cta-fg: #ffffff;         /* primary button text                         */
+  --t-danger: #ef4444;         /* active heart / like state (red-500)         */
+
+  /* ---------- brand accent tokens (overridden by <ThemeStyle>) ---------- */
+  --t-brand-accent: #22d3ee;
+  --t-brand-accent-rgb: 34 211 238;
+  --t-brand-accent-wordmark: rgb(34 211 238 / 0.26);
+  --t-brand-accent-ring: rgb(34 211 238 / 0.50);
+  --t-brand-accent-selection: rgb(34 211 238 / 0.22);
+
+  /* ---------- color: ink alpha ramp (hierarchy is opacity, not hue) ---------- */
+  --t-ink-3:  rgb(21 21 21 / 0.03);
+  --t-ink-5:  rgb(21 21 21 / 0.05);
+  --t-ink-10: rgb(21 21 21 / 0.10);
+  --t-ink-15: rgb(21 21 21 / 0.15);
+  --t-ink-20: rgb(21 21 21 / 0.20);
+  --t-ink-30: rgb(21 21 21 / 0.30);
+  --t-ink-35: rgb(0 0 0 / 0.35);   /* secondary display text ("and", "a", "&") */
+  --t-ink-40: rgb(0 0 0 / 0.40);   /* hero paragraph, icon actions             */
+  --t-ink-50: rgb(21 21 21 / 0.50);
+  --t-ink-60: rgb(21 21 21 / 0.60);
+  --t-ink-65: rgb(21 21 21 / 0.65);
+  --t-ink-70: rgb(21 21 21 / 0.70);
+  --t-ink-80: rgb(21 21 21 / 0.80);
+
+  --t-paper-10: rgb(239 239 239 / 0.10);
+  --t-paper-65: rgb(239 239 239 / 0.65);
+
+  --t-white-10: rgb(255 255 255 / 0.10);
+  --t-white-20: rgb(255 255 255 / 0.20);
+  --t-white-45: rgb(255 255 255 / 0.45);
+  --t-white-55: rgb(255 255 255 / 0.55);
+  --t-white-75: rgb(255 255 255 / 0.75);
+  --t-white-90: rgb(255 255 255 / 0.90);
+
+  /* ---------- color: semantic ---------- */
+  --t-bg: var(--t-paper);
+  --t-bg-reading: var(--t-paper-reading);
+  --t-fg: var(--t-ink);
+  --t-fg-prose: var(--t-ink-warm);
+  --t-fg-muted: var(--t-ink-65);
+  --t-fg-subtle: var(--t-ink-50);
+  --t-fg-faint: var(--t-ink-35);
+  --t-surface: var(--t-well);
+  --t-surface-raised: var(--t-white);
+  --t-surface-bubble: var(--t-bubble);
+  --t-surface-glass: rgb(255 255 255 / 0.54);
+  --t-frame: var(--t-white);
+  --t-nav-bg: var(--t-ink);
+  --t-nav-fg: var(--t-paper);
+  --t-nav-border: transparent;
+  --t-chip: var(--t-ink-5);
+  --t-chip-hover: var(--t-ink-10);
+  --t-rule: rgb(0 0 0 / 0.10);       /* dashed rails + divider rules */
+  --t-hairline: var(--t-ink-15);     /* list separators, inputs      */
+  --t-hatch: rgb(0 0 0 / 0.05);      /* diagonal hatch strokes       */
+  --t-overlay: rgb(0 0 0 / 0.30);    /* modal backdrop               */
+  --t-inverse-bg: var(--t-ink);
+  --t-inverse-fg: var(--t-paper);
+  --t-stage-bg: var(--t-night);
+  --t-stage-fg: var(--t-white-90);
+  --t-accent: var(--t-brand-accent-wordmark);
+
+  /* ---------- typography ---------- */
+  --t-font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter Variable", "Inter", "Segoe UI", sans-serif;
+  --t-font-hand: "Caveat", "Segoe Print", cursive;
+  --t-font-prose: "Piazzolla", Georgia, serif;
+  --t-font-prose-display: var(--t-font-prose);
+  --t-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+  --t-tracking-body: -0.3px;      /* applied globally on <body>          */
+  --t-tracking-copy: -0.035em;    /* long-form paragraphs                */
+  --t-tracking-display: -0.06em;  /* h1                                  */
+  --t-tracking-tighter: -0.065em; /* h2 / subline                        */
+  --t-tracking-wordmark: -0.09em; /* giant footer wordmark               */
+  --t-tracking-eyebrow: 0.08em;   /* uppercase eyebrow (rare)            */
+
+  /* type scale */
+  --t-text-micro: 11px;                       /* mono meta (LONDON 13:40)  */
+  --t-text-xs: 0.75rem;                       /* chips, tags, meta         */
+  --t-text-sm: 0.875rem;                      /* body small, nav, buttons  */
+  --t-text-btn: 0.9375rem;                    /* 15px primary CTA          */
+  --t-text-md: 1rem;
+  --t-text-lg: 1.125rem;                      /* 18px article prose body   */
+  --t-text-xl: 1.25rem;                       /* post titles, blockquotes  */
+  --t-text-2xl: 1.5rem;                       /* section headers           */
+  --t-text-3xl: 1.875rem;                     /* script statements, h2     */
+  --t-text-4xl: 2.25rem;                      /* article & case study h1   */
+  --t-text-5xl: 3rem;                         /* article & case study h1   */
+  --t-text-6xl: 3.75rem;                      /* blog index `.serif` h1    */
+  --t-text-display: clamp(1.75rem, 4vw, 2.1rem);
+  --t-text-closing: clamp(2.5rem, 4vw, 3rem); /* footer CTA headline       */
+  --t-text-wordmark: clamp(5rem, 44vw, 28rem);
+
+  --t-leading-display: 0.8;   /* stacked hero lines touch on purpose */
+  --t-leading-tight: 1.05;
+  --t-leading-heading: 1.2;
+  --t-leading-copy: 1.45;
+  --t-leading-normal: 1.5;
+  --t-leading-relaxed: 1.625;
+  --t-leading-prose: 1.8;     /* long-form article paragraphs        */
+
+  --t-weight-regular: 400;
+  --t-weight-medium: 500;
+  --t-weight-semibold: 600;
+  --t-weight-bold: 700;
+
+  /* ---------- space (4px grid, Tailwind --spacing: .25rem) ---------- */
+  --t-space-1: 0.25rem;
+  --t-space-2: 0.5rem;
+  --t-space-3: 0.75rem;
+  --t-space-4: 1rem;
+  --t-space-5: 1.25rem;
+  --t-space-6: 1.5rem;
+  --t-space-7: 1.75rem;
+  --t-space-8: 2rem;
+  --t-space-10: 2.5rem;
+  --t-space-12: 3rem;
+  --t-space-16: 4rem;
+  --t-space-24: 6rem;
+  --t-space-32: 8rem;         /* top clearance below fixed dock-tab nav */
+
+  /* ---------- layout ---------- */
+  --t-column: 55rem;          /* 880px — home & blog index column (max-w-220) */
+  --t-case-width: 56rem;      /* 896px — project case study column (max-w-4xl)*/
+  --t-nav-width: 50rem;       /* 800px — nav tab (w-200)                      */
+  --t-prose: 42rem;           /* hero paragraph measure                       */
+  --t-list: 48rem;            /* 768px — blog list & article column (max-w-3xl)*/
+  --t-modal-width: 24rem;     /* 384px — share modal (max-w-sm)               */
+  --t-gutter: 1rem;           /* mobile side padding                          */
+  --t-gutter-lg: 2.5rem;      /* ≥640px side padding                          */
+  --t-rail-offset: 25rem;     /* dashed vertical rails on home & blog (left-100) */
+  --t-rail-offset-wide: 10rem;/* dashed vertical rails on case study (left-40) */
+  --t-divider-h: 4rem;        /* hatched section divider height               */
+
+  /* ---------- radius ---------- */
+  --t-radius-2xs: 0.25rem;    /* inline code, speech-bubble top-left corner   */
+  --t-radius-xs: 0.375rem;    /* hero image, social squircles (md)            */
+  --t-radius-sm: 0.5rem;      /* code blocks, blog cover thumbs, pagination   */
+  --t-radius-lg: 0.75rem;     /* sticker icons, feature cards, inputs (xl)    */
+  --t-radius-xl: 1rem;        /* media inside cards, comment bubbles (2xl)    */
+  --t-radius-2xl: 1.5rem;     /* hovered card, panels (3xl)                   */
+  --t-radius-tab: 26px;       /* nav tab bottom corners                       */
+  --t-radius-pill: 9999px;
+
+  /* ---------- elevation ---------- */
+  --t-shadow-nav: 0 8px 30px rgb(48 47 45 / 0.05);
+  --t-shadow-button: 0 4px 10px rgb(0 0 0 / 0.05);
+  --t-shadow-polaroid: 0 8px 12px -4px rgb(45 25 9 / 0.15);
+  --t-shadow-panel: 0 12px 40px rgb(21 21 21 / 0.05);
+  --t-shadow-modal: 0 24px 48px -12px rgb(0 0 0 / 0.18);
+  --t-shadow-pop: 0 4px 6px -1px rgb(21 21 21 / 0.10), 0 2px 4px -2px rgb(21 21 21 / 0.10);
+  --t-shadow-inset: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  --t-shadow-sticker: 0 6px 6px 0 rgb(0 0 0 / 0.08), inset 0 0 14px #000;
+
+  /* ---------- motion ---------- */
+  --t-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --t-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-dur-fast: 150ms;
+  --t-dur-base: 300ms;
+  --t-dur-slow: 500ms;
+  --t-dur-reveal: 700ms;
+  --t-reveal-distance: 16px;
+  --t-stagger: 80ms;
+}
+
+/* ==========================================================================
+   Dark Mode Tokens
+   Inverts paper (#efefef) and night (#0d0e0e), flips the 11-step ink alpha
+   ramp to off-white alpha so every component keeps its exact contrast ratio.
+   ========================================================================== */
+:root.dark,
+:root[data-theme="dark"],
+.t-dark {
+  color-scheme: dark;
+
+  --t-ink: #efefef;
+  --t-ink-warm: #e4e2dd;
+  --t-paper: #0d0e0e;
+  --t-paper-reading: #111212;
+  --t-white: #1c1e1e;
+  --t-well: #151717;
+  --t-bubble: #181a1a;
+  --t-night: #080909;
+  --t-cta-top: #f5f5f5;
+  --t-cta-bottom: #d8d8d8;
+  --t-cta-fg: #151515;
+
+  --t-ink-3:  rgb(239 239 239 / 0.04);
+  --t-ink-5:  rgb(239 239 239 / 0.07);
+  --t-ink-10: rgb(239 239 239 / 0.12);
+  --t-ink-15: rgb(239 239 239 / 0.16);
+  --t-ink-20: rgb(239 239 239 / 0.22);
+  --t-ink-30: rgb(239 239 239 / 0.32);
+  --t-ink-35: rgb(239 239 239 / 0.38);
+  --t-ink-40: rgb(239 239 239 / 0.45);
+  --t-ink-50: rgb(239 239 239 / 0.55);
+  --t-ink-60: rgb(239 239 239 / 0.64);
+  --t-ink-65: rgb(239 239 239 / 0.70);
+  --t-ink-70: rgb(239 239 239 / 0.76);
+  --t-ink-80: rgb(239 239 239 / 0.85);
+
+  --t-bg: var(--t-paper);
+  --t-bg-reading: var(--t-paper-reading);
+  --t-fg: var(--t-ink);
+  --t-fg-prose: var(--t-ink-warm);
+  --t-fg-muted: var(--t-ink-65);
+  --t-fg-subtle: var(--t-ink-50);
+  --t-fg-faint: var(--t-ink-35);
+  --t-surface: var(--t-well);
+  --t-surface-raised: var(--t-white);
+  --t-surface-bubble: var(--t-bubble);
+  --t-surface-glass: rgb(24 26 26 / 0.75);
+  --t-frame: #222424;
+  --t-nav-bg: #171919;
+  --t-nav-fg: #efefef;
+  --t-nav-border: rgb(255 255 255 / 0.08);
+  --t-chip: var(--t-ink-5);
+  --t-chip-hover: var(--t-ink-10);
+  --t-rule: rgb(255 255 255 / 0.10);
+  --t-hairline: var(--t-ink-15);
+  --t-hatch: rgb(255 255 255 / 0.05);
+  --t-overlay: rgb(0 0 0 / 0.65);
+  --t-inverse-bg: #efefef;
+  --t-inverse-fg: #151515;
+
+  --t-shadow-nav: 0 10px 32px rgb(0 0 0 / 0.45);
+  --t-shadow-button: 0 4px 14px rgb(0 0 0 / 0.35);
+  --t-shadow-polaroid: 0 10px 18px -4px rgb(0 0 0 / 0.55);
+  --t-shadow-panel: 0 12px 40px rgb(0 0 0 / 0.35);
+  --t-shadow-modal: 0 24px 48px -12px rgb(0 0 0 / 0.65);
+  --t-shadow-pop: 0 6px 14px -2px rgb(0 0 0 / 0.50);
+  --t-shadow-inset: inset 0 2px 5px 0 rgb(0 0 0 / 0.45);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --t-ink: #efefef;
+    --t-ink-warm: #e4e2dd;
+    --t-paper: #0d0e0e;
+    --t-paper-reading: #111212;
+    --t-white: #1c1e1e;
+    --t-well: #151717;
+    --t-bubble: #181a1a;
+    --t-night: #080909;
+    --t-cta-top: #f5f5f5;
+    --t-cta-bottom: #d8d8d8;
+    --t-cta-fg: #151515;
+    --t-ink-3:  rgb(239 239 239 / 0.04);
+    --t-ink-5:  rgb(239 239 239 / 0.07);
+    --t-ink-10: rgb(239 239 239 / 0.12);
+    --t-ink-15: rgb(239 239 239 / 0.16);
+    --t-ink-20: rgb(239 239 239 / 0.22);
+    --t-ink-30: rgb(239 239 239 / 0.32);
+    --t-ink-35: rgb(239 239 239 / 0.38);
+    --t-ink-40: rgb(239 239 239 / 0.45);
+    --t-ink-50: rgb(239 239 239 / 0.55);
+    --t-ink-60: rgb(239 239 239 / 0.64);
+    --t-ink-65: rgb(239 239 239 / 0.70);
+    --t-ink-70: rgb(239 239 239 / 0.76);
+    --t-ink-80: rgb(239 239 239 / 0.85);
+    --t-bg: var(--t-paper);
+    --t-bg-reading: var(--t-paper-reading);
+    --t-fg: var(--t-ink);
+    --t-fg-prose: var(--t-ink-warm);
+    --t-fg-muted: var(--t-ink-65);
+    --t-fg-subtle: var(--t-ink-50);
+    --t-fg-faint: var(--t-ink-35);
+    --t-surface: var(--t-well);
+    --t-surface-raised: var(--t-white);
+    --t-surface-bubble: var(--t-bubble);
+    --t-surface-glass: rgb(24 26 26 / 0.75);
+    --t-frame: #222424;
+    --t-nav-bg: #171919;
+    --t-nav-fg: #efefef;
+    --t-nav-border: rgb(255 255 255 / 0.08);
+    --t-chip: var(--t-ink-5);
+    --t-chip-hover: var(--t-ink-10);
+    --t-rule: rgb(255 255 255 / 0.10);
+    --t-hairline: var(--t-ink-15);
+    --t-hatch: rgb(255 255 255 / 0.05);
+    --t-overlay: rgb(0 0 0 / 0.65);
+    --t-inverse-bg: #efefef;
+    --t-inverse-fg: #151515;
+    --t-shadow-nav: 0 10px 32px rgb(0 0 0 / 0.45);
+    --t-shadow-button: 0 4px 14px rgb(0 0 0 / 0.35);
+    --t-shadow-polaroid: 0 10px 18px -4px rgb(0 0 0 / 0.55);
+    --t-shadow-panel: 0 12px 40px rgb(0 0 0 / 0.35);
+    --t-shadow-modal: 0 24px 48px -12px rgb(0 0 0 / 0.65);
+    --t-shadow-pop: 0 6px 14px -2px rgb(0 0 0 / 0.50);
+    --t-shadow-inset: inset 0 2px 5px 0 rgb(0 0 0 / 0.45);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-dur-fast: 0ms;
+    --t-dur-base: 0ms;
+    --t-dur-slow: 0ms;
+    --t-dur-reveal: 0ms;
+    --t-reveal-distance: 0px;
+  }
+}

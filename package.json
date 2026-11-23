@@ -1,0 +1,68 @@
+{
+  "name": "model-ui",
+  "version": "0.1.0",
+  "description": "Model UI — Config-driven paper & ink React/Next.js design system for AI agents and humans",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "main": "./packages/ui/dist/index.js",
+  "module": "./packages/ui/dist/index.js",
+  "types": "./packages/ui/dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./packages/ui/dist/index.d.ts",
+      "import": "./packages/ui/dist/index.js",
+      "default": "./packages/ui/dist/index.js"
+    },
+    "./client": {
+      "types": "./packages/ui/dist/client.d.ts",
+      "import": "./packages/ui/dist/client.js",
+      "default": "./packages/ui/dist/client.js"
+    },
+    "./config": {
+      "types": "./packages/ui/dist/config.d.ts",
+      "import": "./packages/ui/dist/config.js",
+      "default": "./packages/ui/dist/config.js"
+    },
+    "./styles.css": "./packages/ui/src/styles/model.css",
+    "./tokens.css": "./packages/ui/src/styles/tokens.css",
+    "./tailwind.css": "./packages/ui/src/styles/tailwind.theme.css",
+    "./fonts/*": "./packages/ui/src/fonts/*"
+  },
+  "files": [
+    "packages/ui/dist",
+    "packages/ui/src/styles",
+    "packages/ui/src/fonts",
+    "README.md",
+    "AGENTS.md"
+  ],
+  "dependencies": {
+    "zod": "^3.24.2"
+  },
+  "peerDependencies": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "pnpm --filter model-ui build && pnpm --filter model-ui-example build",
+    "build:pkg": "pnpm --filter model-ui build",
+    "dev": "pnpm --filter model-ui-example dev",
+    "typecheck": "pnpm --filter model-ui typecheck && pnpm --filter model-ui-example typecheck",
+    "test": "pnpm --filter model-ui test",
+    "check:brand": "node scripts/check-brand-leaks.mjs",
+    "test:visual": "node scripts/visual-test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.65.1"
+  }
+}

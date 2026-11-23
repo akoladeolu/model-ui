@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Helix — project case study template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/tayo.css" />
+</head>
+<body class="t-body t-root">
+<div class="t-page t-rails t-rails--wide">
+
+  <!-- Dock-tab Navigation -->
+  <nav class="t-nav t-nav-drop" aria-label="Main navigation">
+    <div class="t-nav__bar">
+      <a href="../index.html" aria-label="home"><span class="t-nav__avatar" style="display:grid;place-items:center;background:var(--t-paper);color:var(--t-ink);font-weight:700;font-size:.8rem">t.</span></a>
+      <div class="t-nav__links">
+        <a class="t-nav__link" href="case-study.html" aria-current="page">projects</a>
+        <a class="t-nav__link" href="blog-index.html">blog</a>
+      </div>
+      <div class="t-nav__actions">
+        <button class="t-icon-btn t-theme-toggle" type="button" aria-label="Toggle dark mode" data-theme-toggle>
+          <svg class="t-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+          <svg class="t-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Case Study Container (max-w-4xl / 896px, pt-32) -->
+  <main class="t-case">
+    <a class="t-back-link t-reveal" href="../index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6 9 12l6 6"/></svg>
+      <span>Back to Projects</span>
+    </a>
+
+    <!-- Case Study Header -->
+    <header class="t-case__header t-reveal" style="--d:1">
+      <div class="t-case__title-row">
+        <h1 class="t-case__title">Helix</h1>
+        <span class="t-case__year">2025</span>
+      </div>
+      <p class="t-case__subtitle">Self-Hosted Localhost Tunneling Tool</p>
+      <div class="t-case__actions">
+        <a class="t-btn-solid" href="#live">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6"/><path d="M15 3h6v6M10 14 21 3"/></svg>
+          <span>View Live</span>
+        </a>
+        <a class="t-btn-ghost" href="#code">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+          <span>View Code</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- 16:9 Hero Banner / Giant Monogram -->
+    <div class="t-case__hero t-reveal" style="--d:2">
+      <span class="t-case__monogram">H</span>
+    </div>
+
+    <!-- Full Tag Strip -->
+    <div class="t-case__tags t-reveal" style="--d:3">
+      <span class="t-pill-tag">Node.js</span>
+      <span class="t-pill-tag">TypeScript</span>
+      <span class="t-pill-tag">CLI</span>
+      <span class="t-pill-tag">Self-Hosted</span>
+      <span class="t-pill-tag">Networking</span>
+    </div>
+
+    <!-- 6-Section Case Study Narrative -->
+    <div class="t-case__body">
+      <section class="t-reveal">
+        <h2 class="t-case__h2">The Challenge</h2>
+        <p class="t-case__p">Existing tunneling tools like ngrok hand out disposable subdomains on every restart, offer no self-hosting story, and charge for basics like persistent URLs. Developers demoing work-in-progress need a stable, shareable link without standing up their own infrastructure from scratch — but they also don't want to hand traffic to a third party they don't control.</p>
+      </section>
+
+      <section class="t-reveal">
+        <h2 class="t-case__h2">The Solution</h2>
+        <p class="t-case__p">Built Helix around path-based routing instead of subdomains — every tunnel lives at a persistent <code>/tunnel/{name}/</code> path, claimed once and reused. The relay is self-hostable, so traffic stays on infrastructure the user controls. Auth is passwordless (email one-time code), shared across web and CLI.</p>
+      </section>
+
+      <section class="t-reveal">
+        <h2 class="t-case__h2 t-case__h2--spaced">Impact</h2>
+        <ul class="t-case__list">
+          <li><span class="t-case__marker">•</span><span>Delivered a working ngrok alternative with zero ongoing hosting cost via Render's free tier</span></li>
+          <li><span class="t-case__marker">•</span><span>Solved the relative-URL breakage problem inherent to path-based (non-subdomain) tunneling</span></li>
+          <li><span class="t-case__marker">•</span><span>Shipped passwordless auth shared cleanly across CLI and web dashboard</span></li>
+          <li><span class="t-case__marker">•</span><span>Took the product from idea to full build in 4–5 days</span></li>
+        </ul>
+      </section>
+
+      <section class="t-reveal">
+        <h2 class="t-case__h2 t-case__h2--spaced">Key Features</h2>
+        <div class="t-feature-grid">
+          <div class="t-feature-card"><p>Path-based persistent tunnels (/tunnel/{name}/) instead of disposable subdomains</p></div>
+          <div class="t-feature-card"><p>Self-hosted relay — traffic stays on infrastructure you control</p></div>
+          <div class="t-feature-card"><p>Passwordless email-code authentication, shared across CLI and web</p></div>
+          <div class="t-feature-card"><p>Live request history dashboard &amp; password-protected tunnels</p></div>
+        </div>
+      </section>
+
+      <section class="t-reveal">
+        <h2 class="t-case__h2 t-case__h2--spaced">Tech Stack</h2>
+        <div class="t-stack-grid">
+          <div class="t-stack-item"><span class="t-stack-dot"></span><span>Node.js relay server + CLI client, TypeScript throughout</span></div>
+          <div class="t-stack-item"><span class="t-stack-dot"></span><span>Appwrite for auth &amp; data (cloud free tier)</span></div>
+          <div class="t-stack-item"><span class="t-stack-dot"></span><span>GitHub OAuth for CLI authentication</span></div>
+          <div class="t-stack-item"><span class="t-stack-dot"></span><span>Render (free tier) with uptime pinging</span></div>
+        </div>
+      </section>
+
+      <section class="t-reveal">
+        <h2 class="t-case__h2 t-case__h2--spaced">Lessons Learned</h2>
+        <ul class="t-case__list">
+          <li><span class="t-case__marker">→</span><span>Path-based routing is viable but requires rewriting relative asset URLs server-side — a subdomain-based tool doesn't have this problem</span></li>
+          <li><span class="t-case__marker">→</span><span>Free-tier hosting is workable for a real product if you actively manage idle spin-down</span></li>
+          <li><span class="t-case__marker">→</span><span>Shipping a full product (not just an MVP) in 4–5 days is possible with tight scope discipline</span></li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- Bottom Closing CTA -->
+    <div class="t-case__cta t-reveal">
+      <h3 class="t-case__cta-title">Interested in working together?</h3>
+      <p class="t-case__cta-sub">Let's build something amazing.</p>
+      <a class="t-btn-solid t-btn-solid--lg" href="mailto:hello@example.com">Get in Touch</a>
+    </div>
+  </main>
+</div>
+
+<script>
+  document.querySelectorAll('.t-reveal').forEach(el => el.classList.add('is-in'));
+  document.querySelectorAll('[data-theme-toggle]').forEach(btn => btn.addEventListener('click', () => {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    html.classList.toggle('dark', next === 'dark');
+  }));
+</script>
+</body>
+</html>
