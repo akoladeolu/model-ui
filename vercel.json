@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "pnpm --filter model-ui build && pnpm --filter model-ui-example build",
-  "outputDirectory": "apps/example/.next",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "buildCommand": "pnpm --filter model-ui build && pnpm --filter model-ui-example build"
 }
