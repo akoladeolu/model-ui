@@ -4,6 +4,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import {
   ACCENT_PRESETS,
   defineSiteConfig,
+  siteConfigSchema,
   resolveAccent,
   toCssVarStyleText,
   toCssVars,
@@ -295,4 +296,50 @@ describe("Templates render with white-label config", () => {
     expect(caseStudy.container.textContent).toContain("Lessons Learned");
     caseStudy.unmount();
   });
+
+  it("safeParse cleanly validates custom hex accents and exact 12-char wordmarks", () => {
+    const raw = {
+      brand: {
+        name: "Nova Labs",
+        logo: "nova.",
+        monogram: "NL",
+        wordmark: "123456789012", // exactly 12 chars
+        tagline: "Systems research",
+      },
+      theme: {
+        accent: { hex: "#ff5c00" },
+      },
+    };
+    const parsed = siteConfigSchema.safeParse(raw);
+    expect(parsed.success).toBe(true);
+    if (parsed.success) {
+      expect(parsed.data.brand.name).toBe("Nova Labs");
+      expect(parsed.data.brand.wordmark).toBe("123456789012");
+      expect(parsed.data.theme.accent).toEqual({ hex: "#ff5c00" });
+    }
+  });
+
+  it("safeParse returns structured validation errors without throwing for 13+ char wordmarks", () => {
+    const raw = {
+      brand: {
+        name: "Nova Labs",
+        logo: "nova.",
+        monogram: "NL",
+        wordmark: "thirteenchars",
+        tagline: "Systems research",
+      },
+      location: {
+        city: "BERLIN",
+        timeZone: "Invalid/Timezone",
+      },
+    };
+    const parsed = siteConfigSchema.safeParse(raw);
+    expect(parsed.success).toBe(false);
+    if (!parsed.success) {
+      const paths = parsed.error.issues.map((i) => i.path.join("."));
+      expect(paths).toContain("brand.wordmark");
+      expect(paths).toContain("location.timeZone");
+    }
+  });
 });
+

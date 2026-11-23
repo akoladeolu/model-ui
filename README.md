@@ -181,8 +181,36 @@ pnpm typecheck      # Type-check packages/ui and apps/example
 pnpm test           # Run Vitest unit & component tests
 pnpm build          # Build model-ui dist/ and Next.js production app
 pnpm check:brand    # Verify zero hardcoded personal branding leaks
-pnpm test:visual    # Run Playwright visual & overflow verification
+pnpm test:visual    # Run Playwright visual, studio E2E & overflow suite
 ```
+
+---
+
+## 5. Interactive Studio Visual Playground
+
+Model UI includes a live in-browser testing studio inside `apps/example`:
+
+* **Live Brand & Theme Customization:** Edit brand name, logo mark, monogram, footer wordmark (with 12-char limit guard), and tagline in real time.
+* **Accent Palette Restraint & Custom Hex:** Select from the 5 luminance-balanced presets (`cyan`, `lime`, `amber`, `violet`, `mono`) or pick a custom brand hex code with auto-computed WCAG contrast alphas.
+* **Live Clock & Timezone Selector:** Change city, locale, and IANA timezone with live status dot recalculations.
+* **Interactive Content Swapper:** Live-edit project titles, descriptions, categories, and tags, as well as blog post metadata.
+* **Safe Typing & Fault Tolerance:** Uses `siteConfigSchema.safeParse` behind the scenes — typing incomplete values never crashes the preview.
+* **Cross-Page Persistence:** Changes persist via `localStorage` as you navigate across `/`, `/blog`, `/blog/[slug]`, and `/projects/[slug]`.
+* **Zero-Config Code Exporter:** Switch to the Export tab to copy ready-to-use TypeScript snippets for `site.config.ts` and `content.ts`.
+* **Hide Studio Control Bar:** Append `?studio=off` to any URL for a clean presentation mode.
+
+---
+
+## 6. Zero-Config Vercel Deployment
+
+Deploy the Model UI example and studio directly to Vercel:
+
+1. Import the repository `akoladeolu/model-ui` into your Vercel Dashboard.
+2. The bundled `vercel.json` and pinned `packageManager: pnpm@12.23.0` handle everything automatically:
+   * **Framework Preset:** Next.js
+   * **Root Directory:** `./`
+   * **Build Command:** `pnpm build`
+   * **Output Directory:** `apps/example/.next`
 
 ---
 

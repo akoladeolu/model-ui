@@ -1,8 +1,9 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { CaseStudyTemplate, ThemeStyle } from "model-ui";
+import { ThemeStyle } from "model-ui";
 import { resolveDemoConfig } from "@/site.config";
 import { projects } from "@/content/data";
+import { StudioCaseStudyView } from "@/components/StudioPages";
 
 export default async function ProjectCaseStudyPage({
   params,
@@ -20,7 +21,11 @@ export default async function ProjectCaseStudyPage({
   return (
     <>
       <ThemeStyle config={config} />
-      <CaseStudyTemplate config={config} project={project} />
+      <StudioCaseStudyView
+        slug={slug}
+        initialConfig={config}
+        initialProject={project}
+      />
     </>
   );
 }

@@ -4,10 +4,11 @@ import { ThemeStyle } from "model-ui";
 import { ThemeProvider } from "model-ui/client";
 import "model-ui/styles.css";
 import { siteConfig } from "@/site.config";
-import { DemoSwitcherBar } from "@/components/DemoSwitcherBar";
+import { StudioProvider } from "@/studio/StudioContext";
+import { StudioDrawer } from "@/components/StudioDrawer";
 
 export const metadata: Metadata = {
-  title: `${siteConfig.brand.name} — Model UI Design System`,
+  title: `${siteConfig.brand.name} — Model UI Interactive Studio`,
   description: siteConfig.brand.tagline,
 };
 
@@ -19,9 +20,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body className="t-body t-root">
         <ThemeProvider defaultMode={siteConfig.theme.defaultMode}>
-          {children}
           <Suspense fallback={null}>
-            <DemoSwitcherBar />
+            <StudioProvider initialConfig={siteConfig}>
+              {children}
+              <StudioDrawer />
+            </StudioProvider>
           </Suspense>
         </ThemeProvider>
       </body>

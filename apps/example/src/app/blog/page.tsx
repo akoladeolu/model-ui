@@ -1,7 +1,8 @@
 import React from "react";
-import { BlogIndexTemplate, ThemeStyle } from "model-ui";
+import { ThemeStyle } from "model-ui";
 import { resolveDemoConfig } from "@/site.config";
 import { posts } from "@/content/data";
+import { StudioBlogIndexView } from "@/components/StudioPages";
 
 export default async function BlogIndexPage({
   searchParams,
@@ -14,13 +15,7 @@ export default async function BlogIndexPage({
   return (
     <>
       <ThemeStyle config={config} />
-      <BlogIndexTemplate
-        config={config}
-        posts={posts}
-        currentPage={1}
-        totalPages={2}
-        nextHref="/blog"
-      />
+      <StudioBlogIndexView initialConfig={config} initialPosts={posts} />
     </>
   );
 }
